@@ -209,8 +209,10 @@ void decomposeExpression(char** expression, char** assembly, uint32_t* currentAs
         decomposeExpression(&after, assembly, currentAssemblyLine, instructionCount, map, returnRegister + 2, sourceLine);
         sprintfAsm(assembly, currentAssemblyLine, (*instructionCount)++, "CMP r%d r%d r%d\n", returnRegister + 1, returnRegister + 1, returnRegister + 2);
         sprintfAsm(assembly, currentAssemblyLine, (*instructionCount)++, "LRC r%d #1\n", returnRegister); // Start true (1)
-        sprintfAsm(assembly, currentAssemblyLine, (*instructionCount)++, "LRC r%d #%d\n", returnRegister + 2, (*instructionCount + 4) / SEGMENT_SIZE);
-        sprintfAsm(assembly, currentAssemblyLine, (*instructionCount)++, "LRC r%d #%d\n", returnRegister + 3, (*instructionCount + 3) % SEGMENT_SIZE);
+        sprintfAsm(assembly, currentAssemblyLine, (*instructionCount), "LRC r%d #%d\n", returnRegister + 2, (*instructionCount + 4) / SEGMENT_SIZE);
+        (*instructionCount)++;
+        sprintfAsm(assembly, currentAssemblyLine, (*instructionCount), "LRC r%d #%d\n", returnRegister + 3, (*instructionCount + 3) % SEGMENT_SIZE);
+        (*instructionCount)++;
         sprintfAsm(assembly, currentAssemblyLine, (*instructionCount)++, "JEQ r%d r%d r%d\n", returnRegister + 1, returnRegister + 2, returnRegister + 3); // Jump over setting to false if equal
         sprintfAsm(assembly, currentAssemblyLine, (*instructionCount)++, "LRC r%d #0\n", returnRegister); // Set false (0)
         return;
@@ -225,8 +227,10 @@ void decomposeExpression(char** expression, char** assembly, uint32_t* currentAs
         decomposeExpression(&after, assembly, currentAssemblyLine, instructionCount, map, returnRegister + 2, sourceLine);
         sprintfAsm(assembly, currentAssemblyLine, (*instructionCount)++, "CMP r%d r%d r%d\n", returnRegister + 1, returnRegister + 1, returnRegister + 2);
         sprintfAsm(assembly, currentAssemblyLine, (*instructionCount)++, "LRC r%d #0\n", returnRegister); // Start false (0)
-        sprintfAsm(assembly, currentAssemblyLine, (*instructionCount)++, "LRC r%d #%d\n", returnRegister + 2, (*instructionCount + 4) / SEGMENT_SIZE);
-        sprintfAsm(assembly, currentAssemblyLine, (*instructionCount)++, "LRC r%d #%d\n", returnRegister + 3, (*instructionCount + 3) % SEGMENT_SIZE);
+        sprintfAsm(assembly, currentAssemblyLine, (*instructionCount), "LRC r%d #%d\n", returnRegister + 2, (*instructionCount + 4) / SEGMENT_SIZE);
+        (*instructionCount)++;
+        sprintfAsm(assembly, currentAssemblyLine, (*instructionCount), "LRC r%d #%d\n", returnRegister + 3, (*instructionCount + 3) % SEGMENT_SIZE);
+        (*instructionCount)++;
         sprintfAsm(assembly, currentAssemblyLine, (*instructionCount)++, "JEQ r%d r%d r%d\n", returnRegister + 1, returnRegister + 2, returnRegister + 3); // Jump over setting to false if equal
         sprintfAsm(assembly, currentAssemblyLine, (*instructionCount)++, "LRC r%d #1\n", returnRegister); // Set true (1)
         return;
@@ -240,8 +244,10 @@ void decomposeExpression(char** expression, char** assembly, uint32_t* currentAs
         decomposeExpression(&after, assembly, currentAssemblyLine, instructionCount, map, returnRegister + 2, sourceLine);
         sprintfAsm(assembly, currentAssemblyLine, (*instructionCount)++, "CMP r%d r%d r%d\n", returnRegister + 1, returnRegister + 1, returnRegister + 2);
         sprintfAsm(assembly, currentAssemblyLine, (*instructionCount)++, "LRC r%d #1\n", returnRegister); // Start true (1)
-        sprintfAsm(assembly, currentAssemblyLine, (*instructionCount)++, "LRC r%d #%d\n", returnRegister + 2, (*instructionCount + 4) / SEGMENT_SIZE);
-        sprintfAsm(assembly, currentAssemblyLine, (*instructionCount)++, "LRC r%d #%d\n", returnRegister + 3, (*instructionCount + 3) % SEGMENT_SIZE);
+        sprintfAsm(assembly, currentAssemblyLine, (*instructionCount), "LRC r%d #%d\n", returnRegister + 2, (*instructionCount + 4) / SEGMENT_SIZE);
+        (*instructionCount)++;
+        sprintfAsm(assembly, currentAssemblyLine, (*instructionCount), "LRC r%d #%d\n", returnRegister + 3, (*instructionCount + 3) % SEGMENT_SIZE);
+        (*instructionCount)++;
         sprintfAsm(assembly, currentAssemblyLine, (*instructionCount)++, "JLT r%d r%d r%d\n", returnRegister + 1, returnRegister + 2, returnRegister + 3); // Jump over setting to false if less than
         sprintfAsm(assembly, currentAssemblyLine, (*instructionCount)++, "LRC r%d #0\n", returnRegister); // Set false (0)
         return;
@@ -255,8 +261,10 @@ void decomposeExpression(char** expression, char** assembly, uint32_t* currentAs
         decomposeExpression(&after, assembly, currentAssemblyLine, instructionCount, map, returnRegister + 2, sourceLine);
         sprintfAsm(assembly, currentAssemblyLine, (*instructionCount)++, "CMP r%d r%d r%d\n", returnRegister + 1, returnRegister + 1, returnRegister + 2);
         sprintfAsm(assembly, currentAssemblyLine, (*instructionCount)++, "LRC r%d #1\n", returnRegister); // Start true (1)
-        sprintfAsm(assembly, currentAssemblyLine, (*instructionCount)++, "LRC r%d #%d\n", returnRegister + 2, (*instructionCount + 4) / SEGMENT_SIZE);
-        sprintfAsm(assembly, currentAssemblyLine, (*instructionCount)++, "LRC r%d #%d\n", returnRegister + 3, (*instructionCount + 3) % SEGMENT_SIZE);
+        sprintfAsm(assembly, currentAssemblyLine, (*instructionCount), "LRC r%d #%d\n", returnRegister + 2, (*instructionCount + 4) / SEGMENT_SIZE);
+        (*instructionCount)++;
+        sprintfAsm(assembly, currentAssemblyLine, (*instructionCount), "LRC r%d #%d\n", returnRegister + 3, (*instructionCount + 3) % SEGMENT_SIZE);
+        (*instructionCount)++;
         sprintfAsm(assembly, currentAssemblyLine, (*instructionCount)++, "JGT r%d r%d r%d\n", returnRegister + 1, returnRegister + 2, returnRegister + 3); // Jump over setting to false if greater than
         sprintfAsm(assembly, currentAssemblyLine, (*instructionCount)++, "LRC r%d #0\n", returnRegister); // Set false (0)
         return;
